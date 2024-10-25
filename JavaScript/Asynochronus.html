@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Callback Example</title>
+</head>
+<body>
+  <h1>JavaScript Learning</h1>
+  <p id="demo"></p>
+  
+  <script>
+    const paymentSuccess = true;
+    let marks = 80;
+
+    function enroll(callback){
+      console.log('Course enrollment is in progress...');
+      setTimeout(function(){
+        if(paymentSuccess){
+          callback(); 
+        } else {
+          console.log('Payment failed');
+        }
+      }, 2000);
+    }
+
+    function progress(callback){
+      console.log('Course on progress...');
+      setTimeout(function(){
+        if(marks >= 80){
+          callback();
+        } else {
+          console.log('You could not get enough marks to get the certificate');
+        }
+      }, 3000);
+    }
+
+    function getCertificate(){
+      console.log("Preparing your certificate!");
+      setTimeout(function(){
+        if(marks >= 80){
+          console.log("Congrats! You got the certificate.");
+        } 
+      }, 1000);
+    }
+
+    enroll(function(){
+      progress(getCertificate);
+    });
+
+  </script>
+</body>
+</html>
